@@ -47,15 +47,15 @@ export default function ScrollableMovies({ movies }: Props) {
 
   return (
     <div
-    ref={scrollRef}
-    className={styles.moviesTrack}
-    onMouseDown={handleDragStart}
-    onMouseUp={handleDragEnd}
-    onMouseLeave={handleDragEnd}
-    onMouseMove={handleDrag}
-    onTouchStart={handleDragStart}
-    onTouchEnd={handleDragEnd}
-    onTouchMove={handleDrag}
+        ref={scrollRef}
+        className={styles.moviesTrack}
+        onMouseDown={handleDragStart}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onMouseMove={handleDrag}
+        onTouchStart={handleDragStart}
+        onTouchEnd={handleDragEnd}
+        onTouchMove={handleDrag}
     >
       {movies.map((movie) => (
           <div 
