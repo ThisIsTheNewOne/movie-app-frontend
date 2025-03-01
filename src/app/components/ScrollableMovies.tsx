@@ -2,6 +2,7 @@ import { useRef, useState,  } from 'react';
 import Image from 'next/image';
 import styles from '../page.module.css';
 import { Movie } from '../lib/types';
+import { redirect } from "next/navigation";
 
 type Props = {
   movies: Movie[];
@@ -37,6 +38,13 @@ export default function ScrollableMovies({ movies }: Props) {
       }
     };
 
+    const handleMovieClick = (movieTitle: string, e: React.MouseEvent) => {
+        if (!isDragging) {
+          e.preventDefault();
+          redirect(`/movies/${encodeURIComponent(movieTitle.toLowerCase())}`);
+        }
+      };
+
   return (
     <div
     ref={scrollRef}
@@ -50,7 +58,12 @@ export default function ScrollableMovies({ movies }: Props) {
     onTouchMove={handleDrag}
     >
       {movies.map((movie) => (
-        <div key={movie.id} className={styles.movieCard}>
+          <div 
+            key={movie.id} 
+            className={styles.movieCard}
+            onClick={(e) => handleMovieClick(movie.title, e)}
+            style={{ cursor: 'pointer' }}
+          >
           <Image
             src={movie.thumbnail || "/fallback-image.jpg"}
             alt={movie.title}

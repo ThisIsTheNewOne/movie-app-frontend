@@ -1,6 +1,6 @@
 "use client";
 
-import Image from 'next/image';
+
 import styles from "./page.module.css";
 // import { roboto } from "@/app/ui/fonts";
 import { redirect } from "next/navigation";
@@ -34,6 +34,15 @@ export default function Home() {
     userList.includes(movie.id)
   );
 
+  const comingSoonMovies = (moviesList as Movie[]).filter((movie) => {
+    const availableDate = new Date(movie.availableDate);
+    const currentDate = new Date();
+    return availableDate > currentDate;
+  }).sort((a, b) => {
+    return new Date(a.availableDate).getTime() - new Date(b.availableDate).getTime();
+  });
+
+
   return (
     <div className={styles.page}>
       <nav className={styles.header}>test</nav>
@@ -56,21 +65,16 @@ export default function Home() {
             ))}
           </div>
           <div>
+            {comingSoonMovies.length > 0 && (
+              <>
+               <h2>Coming Soon</h2>
+               <ScrollableMovies movies={comingSoonMovies} />
+              </>
+            )}
+          </div>
+          <div>
             <h2>My List</h2>
-            <div>
-              {userListMovies.map((movie) => (
-                <div key={movie.id} className={styles.movieCard}>
-                  <Image
-                    src={movie.thumbnail || "/fallback-image.jpg"}
-                    alt={movie.title}
-                    width={261}
-                    height={386}
-                    className={styles.movieImage}
-                    priority
-                  />
-                </div>
-              ))}
-            </div>
+            <ScrollableMovies movies={userListMovies} />
           </div>
         </div>
       </main>
