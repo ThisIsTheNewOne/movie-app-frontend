@@ -1,3 +1,13 @@
+"use client";
+
+import { usePathname } from 'next/navigation';
+
 export default function Page() {
-    return <p>Movie list Page</p>;
+    const pathname = usePathname();
+
+    
+    return <div>
+        <p>Movie list Page</p>
+        <div>{pathname}</div>
+    </div>;
   }

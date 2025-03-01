@@ -1,71 +1,32 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { roboto, robotoCondensed } from "@/app/ui/fonts";
+import { roboto } from "@/app/ui/fonts";
+import Link from 'next/link';
 // import clsx from "clsx";
 
 export default function Home() {
+
+  const link = {
+    name: "Link",
+    href: "/login",
+  };
+
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page}`}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
         <p
           className={`${roboto.className}`}
         >
-          <strong>Welcome to Acme.</strong> This is the example for the{" "}
-          <a href="https://nextjs.org/learn/" className={`${robotoCondensed.className}`}>
-            Next.js Learn Course
-          </a>
-          , brought to you by Vercel.
+          <strong>Test</strong> and another test
         </p>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div>
+           <Link
+             key={link.name}
+             href={link.href}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+             <p>{link.name}</p>
+          </Link>
         </div>
-
-        <span
-        // className={clsx(
-        //   'inline-flex items-center rounded-full px-2 py-1 text-sm',
-        //   {
-        //     'bg-gray-100 text-gray-500': status === 'pending',
-        //     'bg-green-500 text-white': status === 'paid',
-        //   },
-        // )}
-        ></span>
       </main>
       <footer className={styles.footer}>
         <a
