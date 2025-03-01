@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+  }
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* position: relative; */
+    top: 101px;
+}
+
+.trailerButton, .playButton {
+    width: 343px;
+    height: 57px;
+    border-radius: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.trailerButton {
+    background-color: white;
+    color: black;
+}
+
+.playButton {
+    background-color: purple;
+    color: white;
+}

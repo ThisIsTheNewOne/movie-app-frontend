@@ -2,7 +2,8 @@ import { useRef, useState,  } from 'react';
 import Image from 'next/image';
 import styles from '../page.module.css';
 import { Movie } from '../lib/types';
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Props = {
   movies: Movie[];
@@ -13,6 +14,7 @@ export default function ScrollableMovies({ movies }: Props) {
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
+    const router = useRouter();
   
     const handleDragStart = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
       setIsDragging(true);
@@ -38,10 +40,18 @@ export default function ScrollableMovies({ movies }: Props) {
       }
     };
 
-    const handleMovieClick = (movieTitle: string, e: React.MouseEvent) => {
+    const handleMovieClick = (movie: Movie, e: React.MouseEvent) => {
         if (!isDragging) {
           e.preventDefault();
-          redirect(`/movies/${encodeURIComponent(movieTitle.toLowerCase())}`);
+        //   redirect(`/movies/${encodeURIComponent(movieTitle.toLowerCase())}`);
+          const encodedTitle = encodeURIComponent(movie.title.toLowerCase());
+        //   const query = new URLSearchParams({
+        //     id: movie.id.toString(),
+        //     thumbnail: movie.thumbnail || "",
+        //     description: movie.description || "",
+        //   }).toString();
+
+          router.push(`/movies/${encodedTitle}`);
         }
       };
 
@@ -61,7 +71,7 @@ export default function ScrollableMovies({ movies }: Props) {
           <div 
             key={movie.id} 
             className={styles.movieCard}
-            onClick={(e) => handleMovieClick(movie.title, e)}
+            onClick={(e) => handleMovieClick(movie, e)}
             style={{ cursor: 'pointer' }}
           >
           <Image

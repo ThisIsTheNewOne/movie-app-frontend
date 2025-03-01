@@ -13,6 +13,7 @@ import ScrollableMovies from "./components/ScrollableMovies";
 import moviesList from "./lib/data/movies.json";
 import genresList from "./lib/data/genresList.json";
 import userList from "./lib/data/userList.json";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const { user } = useUser();
@@ -49,7 +50,7 @@ export default function Home() {
       <main className={styles.main}>
         <Carousel movies={highlightedMovies} />
         <div>
-          {genresList.map((genreButton) => {
+        {genresList.map((genreButton) => {
             return (
               <button key={genreButton.id} className={styles.genreButton}>
                 {genreButton.name}
@@ -78,7 +79,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className={styles.footer}></footer>
+      <Footer/>
     </div>
   );
 }
