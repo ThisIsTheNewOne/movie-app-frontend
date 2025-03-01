@@ -1,4 +1,5 @@
 import styles from "../page.module.css";
+import { roboto } from "../ui/fonts";
 
 type Props = { title: string; description: string };
 
@@ -15,7 +16,7 @@ export default function MovieDescription({ title, description }: Props) {
       <div className={styles.heroContainer}>
         <h1>{title}</h1>
         <section>
-          <p>{truncateDescription(description)}</p>
+          <p className={roboto.className}>{truncateDescription(description)}</p>
         </section>
       </div>
     </div>

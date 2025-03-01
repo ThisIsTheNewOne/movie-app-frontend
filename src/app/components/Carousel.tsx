@@ -34,7 +34,9 @@ export default function Carousel({ movies }: Props) {
           </div>
         ))}
       </div>
-      <CarouselButtons count={movies.length} scrollToItem={scrollToItem} />
+      <div className={styles.carouselButtons}>
+        <CarouselButtons count={movies.length} scrollToItem={scrollToItem} />
+      </div>
     </section>
   );
 }

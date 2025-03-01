@@ -28,6 +28,12 @@
 .imageContainer img {
   max-width: 100%;
 }
+
+.figure {
+  margin: 0;
+  padding: 0;
+}
+
 .buttonOverlay {
   position: absolute;
   bottom: 40px;

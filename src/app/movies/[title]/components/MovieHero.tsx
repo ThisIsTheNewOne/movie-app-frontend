@@ -14,7 +14,7 @@ export default function MovieHero({ poster, thumbnail, title }: MovieHeroProps) 
 
   return (
     <section className={styles.heroSection}>
-      <figure className={styles.imageContainer}>
+      <div className={styles.imageContainer}>
         <Image
           src={imgSrc}
           alt={title}
@@ -35,7 +35,7 @@ export default function MovieHero({ poster, thumbnail, title }: MovieHeroProps) 
             Play
           </button>
         </figcaption>
-      </figure>
+      </div>
     </section>
   );
 }

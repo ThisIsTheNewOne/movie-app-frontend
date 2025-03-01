@@ -13,7 +13,8 @@ export default function MovieImage({ src }: Props) {
         <Image
           src={imgSrc}
           alt="Movie Background"
-          fill
+          width={3000}
+          height={0}
           className={styles.backgroundImage}
           onError={() => setImgSrc("/fallback-image.jpg")}
           priority
