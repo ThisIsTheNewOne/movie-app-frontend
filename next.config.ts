@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -10,11 +9,27 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**.tmdb.org", // Example for movie posters from TMDB
+        hostname: "**.tmdb.org",
       },
       {
         protocol: "https",
-        hostname: "**.imdb.com", // Example for IMDB images
+        hostname: "**.imdb.com", 
+      },
+      {
+        protocol: "https",
+        hostname: "m.media-amazon.com",
+      },
+      {
+        protocol: "https",
+        hostname: "pics.filmaffinity.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lumiere-a.akamaihd.net", 
+      },
+      {
+        protocol: "https",
+        hostname: "s3.amazonaws.com",
       },
     ],
   },
