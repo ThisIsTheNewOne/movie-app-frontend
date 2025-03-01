@@ -1,88 +1,84 @@
 "use client";
 
-
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "./page.module.css";
-import { roboto } from "@/app/ui/fonts";
-import { redirect } from 'next/navigation'
-import Link from 'next/link';
+// import { roboto } from "@/app/ui/fonts";
+import { redirect } from "next/navigation";
+// import Link from "next/link";
 import { useUser } from "./lib/UserContext";
+import { useRef } from "react";
 // import clsx from "clsx";
 
 export default function Home() {
-
-  const link = {
-    name: "Link",
-    href: "/login",
-  };
+  // const link = {
+  //   name: "Link",
+  //   href: "/login",
+  // };
 
   const { user } = useUser();
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  if(user === undefined) {
+  if (user === undefined) {
     redirect("/login");
   }
 
+  const carouselItems = [
+    {
+      "title": "Movie 1",
+      "description": "Description for Movie 1"
+    },
+    {
+      "title": "Movie 2",
+      "description": "Description for Movie 2"
+    },
+    {
+      "title": "Movie 3",
+      "description": "Description for Movie 3"
+    },
+    {
+      "title": "Movie 4",
+      "description": "Description for Movie 4"
+    }
+  ]
+
+  const scrollToItem = (index: number) => {
+    if (carouselRef.current) {
+      const itemWidth = carouselRef.current.scrollWidth / carouselItems.length;
+      carouselRef.current.scrollTo({
+        left: itemWidth * index,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className={`${styles.page}`}>
+      <nav className={styles.header}>test</nav>
       <main className={styles.main}>
-        <p
-          className={`${roboto.className}`}
-        >
-          <strong>Test</strong> and another test
-        </p>
-        <div>
-           <Link
-             key={link.name}
-             href={link.href}
-          >
-             <p>{link.name}</p>
-          </Link>
-        </div>
+       <section className={styles.carouselContainer}>
+          <div className={styles.carousel} ref={carouselRef}>
+            {carouselItems.map((item, index) => (
+              <div key={index} className={styles.carouselItem}>
+                <h1>{item.title}</h1>
+                <section>
+                  <p>{item.description}</p>
+                </section>
+              </div>
+            ))}
+          </div>
+           <div className={styles.carouselButtons}>
+            {carouselItems.map((_, index) => (
+              <button 
+                key={index} 
+                onClick={() => scrollToItem(index)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        </section>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
   );
 }
