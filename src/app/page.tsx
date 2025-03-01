@@ -23,8 +23,8 @@ export default function Home() {
 
 
   return (
-    <div className={`${styles.page}`}>
-      <nav className={styles.header}>test</nav>
+    <div className={styles.page}>
+        <nav className={styles.header}>test</nav>
         <main className={styles.main}>
           <Carousel movies={highlightedMovies} />
         </main>
