@@ -7,7 +7,7 @@ export default function CarouselButtons({ count, scrollToItem }: Props) {
     <div className={styles.carouselButtons}>
       {Array.from({ length: count }).map((_, index) => (
         <button key={index} onClick={() => scrollToItem(index)}>
-          {index + 1}
+          {}
         </button>
       ))}
     </div>

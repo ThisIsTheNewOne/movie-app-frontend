@@ -78,9 +78,30 @@
   align-items: center;
 }
 
+
 .carouselItem h1 {
   text-transform: uppercase;
   font-size: clamp(54px, 5vw + 1rem, 128px);
+  letter-spacing: 0%;
+  margin: 0;
+}
+
+.heroContainer {
+  width: 86%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+/* .heroContainer h1 {
+  width: 25%
+} */
+
+.heroContainer p {
+  width: 60%;
+  font-size: 24px;
 }
 
 .carouselButtons {
@@ -112,6 +133,33 @@
   margin-left: 10rem;
   margin-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.genreButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.genreButton {
+  width: 125px;
+  height: 46px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 21.09px;
+  letter-spacing: 0;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  background-color: white;
+  color: #333;
+}
+
+.genreButton:hover {
+  background-color: #751B5C;
+  color: white;
 }
 
 .moviesGrid {
