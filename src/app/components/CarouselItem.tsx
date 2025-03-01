@@ -7,7 +7,7 @@ type Props = { poster: string; title: string; description: string };
 export default function CarouselItem({ poster, title, description }: Props) {
   return (
     <div>
-      <MovieImage src={poster} />
+      {/* <MovieImage src={poster} /> */}
       <MovieDescription title={title} description={description} />
     </div>
   );
