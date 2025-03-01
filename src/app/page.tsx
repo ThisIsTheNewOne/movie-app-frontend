@@ -1,7 +1,12 @@
+"use client";
+
+
 import Image from "next/image";
 import styles from "./page.module.css";
 import { roboto } from "@/app/ui/fonts";
+import { redirect } from 'next/navigation'
 import Link from 'next/link';
+import { useUser } from "./lib/UserContext";
 // import clsx from "clsx";
 
 export default function Home() {
@@ -10,6 +15,12 @@ export default function Home() {
     name: "Link",
     href: "/login",
   };
+
+  const { user } = useUser();
+
+  if(user === undefined) {
+    redirect("/login");
+  }
 
   return (
     <div className={`${styles.page}`}>
