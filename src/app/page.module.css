@@ -205,8 +205,34 @@
 
 
 .footer {
-  position: relative;
-  width: 100%;
+  background-color: black;
+  color: white;
+  height: 10rem;
+  padding: 2rem 0;
+}
+
+.footerContent {
+  display: flex;
+  gap: 2rem;
+  margin-left: 10rem;
+  max-width: 1200px;
+  font-size: 18px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.column a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.column a:hover {
+  opacity: 0.8;
 }
 
 /* Enable hover only on non-touch devices */
