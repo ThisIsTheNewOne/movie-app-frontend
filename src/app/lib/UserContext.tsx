@@ -5,8 +5,10 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 
 type UserContextType = {
   user: boolean | undefined;
+  userName: string | null;
   token: string | null;
   setUserFunction: (prop: boolean | undefined) => void;
+  setUserName: (name: string | null) => void;
   setTokenFunction: (token: string | null) => void;
   logout: () => void;
 };
@@ -15,6 +17,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<boolean | undefined>(undefined);
+  const [userName, setUserNameState] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -28,6 +31,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const setUserFunction = (props: boolean | undefined) => {
     setUser(props);
+  };
+
+  const setUserName = (name: string | null) => {
+    if (name) {
+      localStorage.setItem("userName", name);
+    } else {
+      localStorage.removeItem("userName");
+    }
+    setUserNameState(name)
   };
 
   const setTokenFunction = (token: string | null) => {
@@ -48,7 +60,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, token, setUserFunction, setTokenFunction, logout }}>
+    <UserContext.Provider value={{ user, userName,  token, setUserFunction, setUserName, setTokenFunction, logout }}>
       {children}
     </UserContext.Provider>
   );

@@ -8,7 +8,7 @@ import { useUser } from "../lib/UserContext";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const { setUserFunction, setTokenFunction, token  } = useUser();
+  const { setUserFunction, setUserName, setTokenFunction, token  } = useUser();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -71,7 +71,7 @@ export default function Page() {
     setApiError("");
   
     try {
-      const response = await fetch("/api/auth/sign-in", { // Use the Next.js proxy
+      const response = await fetch("/api/auth/sign-in", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -86,8 +86,10 @@ export default function Page() {
   
       const data = await response.json();
 
+      setUserName(formData.email);
       setTokenFunction(data.token);
       setUserFunction(true);
+
       router.push("/");
     } catch (error) {
       setApiError("Invalid email or password");
