@@ -7,7 +7,7 @@ import MovieHero from "./components/MovieHero";
 import MovieActions from "./components/MovieAction";
 import MovieDetails from "./components/MovieDetails";
 import MovieDescription from "./components/MovieDescription";
-// import Navbar from "@/app/components/Navbar";
+import Navbar from "@/app/components/Navbar";
 import { use } from "react";
 import useMovieDetails from "@/app/lib/hooks/useMovieDetails";
 import useUserMovieStatus from "@/app/lib/hooks/useUserMovieStatus";
@@ -29,7 +29,7 @@ export default function MoviePage({ params }: MoviePageProps) {
 
   return (
     <div className={styles.container}>
-      {/* <Navbar /> */}   
+      <Navbar />   
       <main className={styles.main}>
         <MovieHero
           poster={movie.poster || "/fallback-image.jpg"}
