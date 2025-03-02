@@ -4,7 +4,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 type UserContextType = {
   user: boolean | undefined;
-  setUserTrue: () => void;
+  setUserFunction: (prop: boolean | undefined) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -12,12 +12,12 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<boolean | undefined>(undefined);
 
-  const setUserTrue = () => {
-    setUser(true);
+  const setUserFunction = (props: boolean |  undefined) => {
+    setUser(props);
   };
 
   return (
-    <UserContext.Provider value={{ user, setUserTrue }}>
+    <UserContext.Provider value={{ user, setUserFunction }}>
       {children}
     </UserContext.Provider>
   );

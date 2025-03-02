@@ -7,7 +7,7 @@ import { useUser } from "../lib/UserContext";
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  const { setUserTrue } = useUser();
+  const { setUserFunction } = useUser();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -63,7 +63,7 @@ export default function Page() {
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      setUserTrue();
+      setUserFunction(true);
       redirect("/");
     }
   };
