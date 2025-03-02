@@ -5,20 +5,27 @@
 
 .container {
   width: 100%;
+  background: #222222;
 }
 
 .buttonContainer {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  /* position: relative; */
   top: 101px;
 }
+
+/* HERO SECTION */
 
 .heroSection {
   position: relative;
   width: 100%;
-  height: 800px;
+  height: 80vh;
+}
+
+.imageContainer img {
+  max-width: 100%;
+  height: 80vh;
 }
 
 .imageContainer {
@@ -109,8 +116,6 @@
 .description {
   padding-bottom: 3rem;
   font-size: 24px;
-  /* line-height: 28.13px; */
-  /* letter-spacing: 0%; */
 }
 
 .description h1 {
@@ -122,4 +127,156 @@
   overflow-wrap: break-word;
   hyphens: auto;
   max-width: 100%;
+}
+
+.description p {
+  font-size: clamp(16px, 3vw + 1rem, 24px);
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 1600px) {
+
+  .heroSection {
+    height: 78vh;
+  }
+
+  .imageContainer img {
+    max-width: 100%;
+    height: 80vh;
+  }
+
+
+  .trailerButton,
+  .playButton {
+    width: 300px;
+    height: 50px;
+  }
+
+  .margin {
+    margin-left: 3rem;
+    width: 90%;
+  }
+
+  .description h1 {
+    font-size: clamp(48px, 4vw + 1rem, 100px);
+  }
+
+  .description p {
+    font-size: clamp(16px, 3vw + 1rem, 20px);
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .heroSection {
+    height: 74vh;
+  }
+
+  .imageContainer img {
+    max-width: 100%;
+    height: 60vh;
+  }
+
+
+
+  .buttonOverlay {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start ;
+    position: static;
+    z-index: 1;
+    width: 95%;
+    padding-top: 2rem;
+    padding-left: 3rem;
+  }
+
+  .trailerButton,
+  .playButton {
+    width: 300px;
+    height: 50px;
+  }
+
+  .margin {
+    margin-left: 3rem;
+    width: 90%;
+  }
+
+  .description h1 {
+    font-size: clamp(48px, 4vw + 1rem, 100px);
+  }
+
+  .description p {
+    font-size: clamp(16px, 3vw + 1rem, 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .imageContainer img {
+    max-width: 100%;
+    height: 60vh;
+  }
+
+  .buttonOverlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    position: static;
+    z-index: 1;
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .trailerButton,
+  .playButton {
+    width: 100%;
+    height: 57px;
+    margin: 0 auto;
+  }
+
+  .margin {
+    margin-left: 1.5rem;
+    width: 93%;
+  }
+
+  .description h1 {
+    font-size: clamp(36px, 3vw + 1rem, 80px);
+  }
+
+  .description p {
+    font-size: clamp(16px, 3vw + 1rem, 18px);
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .heroSection {
+    height: 540px;
+  }
+
+  .buttonOverlay {
+    width: 90%;
+  }
+
+  .trailerButton,
+  .playButton {
+    height: 50px;
+  }
+
+  .margin {
+    margin-left: 1rem;
+    width: 100%;
+  }
+
+  .description h1 {
+    font-size: clamp(24px, 2vw + 1rem, 60px);
+  }
 }

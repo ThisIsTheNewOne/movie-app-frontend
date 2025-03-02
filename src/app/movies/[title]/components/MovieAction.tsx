@@ -59,7 +59,7 @@ export default function MovieActions({ movie, isInList }: MovieActionsProps) {
         ) : inList ? (
           <div>
             <Image
-              src="/plus-button.png"
+              src="/plus-button.png"  
               alt="Add"
               width={24}
               height={24}

@@ -20,21 +20,21 @@ export default function MovieHero({ poster, thumbnail, title }: MovieHeroProps) 
           alt={title}
           width={3000}
           height={800}
-          priority
+          priority  
           onError={() => setImgSrc(thumbnail)}
           style={{
             objectFit: "cover",
             objectPosition: "center",
           }}
         />
-        <figcaption className={styles.buttonOverlay}>
+        <div className={styles.buttonOverlay}>
           <button className={styles.trailerButton} aria-label="Watch Trailer">
             Trailer
           </button>
           <button className={styles.playButton} aria-label="Play Movie">
             Play
           </button>
-        </figcaption>
+        </div>
       </div>
     </section>
   );

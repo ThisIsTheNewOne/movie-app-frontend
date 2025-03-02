@@ -10,7 +10,7 @@ export default function MovieDescription({ title, description }: MovieDescriptio
   return (
     <section className={`${styles.description} ${styles.margin}`}>
       <h1 className={robotoCondensed.className}>{title}</h1>
-      <p>{description}</p>
+      <p>{description}</p>  
     </section>
   );
 }
