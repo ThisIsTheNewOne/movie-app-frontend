@@ -478,6 +478,36 @@
   color: white;
 }
 
+.moviesTrack {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  user-select: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+}
+
+.moviesTrack::-webkit-scrollbar {
+  display: none; 
+}
+
+.movieCard {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.movieImage {
+  pointer-events: none;
+}
+
+.movieCard:active {
+  transform: scale(0.95);
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
