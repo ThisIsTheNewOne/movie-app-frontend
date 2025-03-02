@@ -27,6 +27,7 @@ export default function MoviePage({ params }: MoviePageProps) {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isInList, setIsInList] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -70,12 +71,35 @@ export default function MoviePage({ params }: MoviePageProps) {
       }
 
       fetchMovieDetails(foundMovie.id);
+      fetchMovieData(foundMovie);
     };
 
     fetchMoviesList();
   }, [token, title, movies]);
 
+  const fetchMovieData = async (foundMovie: Movie) => {
+    try {
+      const userListResponse = await fetch("/api/films/user", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!userListResponse.ok) {
+        throw new Error("Failed to fetch user list");
+      }
+
+      const userList = await userListResponse.json();
+      const data = userList.find((m: string) => m === foundMovie.id);
+
+      setIsInList(data !== undefined);
+      // setIsInList(userList.includes(data.id));
+    } catch (error) {
+      console.error("Error fetching movie data", error);
+    }
+  };
+
   const fetchMovieDetails = async (id: string) => {
+
     try {
       const response = await fetch(`/api/films/movies/${id}`, {
         method: "GET",
@@ -110,7 +134,7 @@ export default function MoviePage({ params }: MoviePageProps) {
            thumbnail={movie?.thumbnail || "/fallback-image.jpg"}
            title={movie?.title || "Unknown Movie"}
         />
-        <MovieActions movie={movie} />
+        <MovieActions movie={movie} isInList={isInList}/>
         <MovieDetails
           rating={Number(movie?.rating) || 0}
           cast={movie?.cast || "Unknown"}
