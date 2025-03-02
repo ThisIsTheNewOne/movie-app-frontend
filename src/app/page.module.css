@@ -5,7 +5,7 @@
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
-  
+
   position: relative;
   min-height: 100vh;
   width: 100%;
@@ -27,7 +27,7 @@
   position: sticky;
   top: 10px;
   right: 10px;
-} 
+}
 
 .header {
   width: 100%;
@@ -46,17 +46,20 @@
   width: 60px;
 }
 
-
 .userLogoContainer {
   position: relative;
   cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: transparent;
+  color: transparent;
 }
 
 .userLogo {
   width: 46px;
   height: 46px;
 }
-
 
 .userLogoContainer {
   position: relative;
@@ -65,7 +68,7 @@
 
 .userLogo {
   border-radius: 50%;
-  border: 2px solid white;
+  /* border: 2px solid white; */
   transition: transform 0.3s ease;
 }
 
@@ -168,7 +171,6 @@
   width: 100%;
   min-height: 100vh;
   background: #222222;
-
 }
 
 .main h2 {
@@ -179,7 +181,7 @@
 
 .carouselContainer {
   width: 100%;
-  height: 80vh; 
+  height: 80vh;
   background-color: gray;
 }
 
@@ -195,7 +197,7 @@
   width: 343px;
   height: 57px;
   border-radius: 16px;
-  background: #751B5C;
+  background: #751b5c;
   color: white;
 }
 
@@ -228,7 +230,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -245,7 +251,6 @@
   align-items: center;
 }
 
-
 .carouselItem h1 {
   text-transform: uppercase;
   font-size: clamp(54px, 5vw + 1rem, 128px);
@@ -261,7 +266,6 @@
   justify-content: center;
   color: white;
 }
-
 
 .heroContainer p {
   width: 40%;
@@ -323,12 +327,12 @@
 }
 
 .genreButton:hover {
-  background-color: #751B5C;
+  background-color: #751b5c;
   color: white;
 }
 
 .selected {
-  background-color:  #751B5C;
+  background-color: #751b5c;
   color: white;
 }
 
@@ -435,7 +439,6 @@
   transform: scale(0.95);
 }
 
-
 .footer {
   background-color: black;
   color: white;
@@ -493,11 +496,8 @@
   }
 }
 
-
 @media (max-width: 768px) {
   .carouselContainer {
     height: 60vh; /* Tablet */
   }
 }
-
-

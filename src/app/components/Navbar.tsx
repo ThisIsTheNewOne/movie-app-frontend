@@ -9,10 +9,10 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null); 
-  
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const router = useRouter();
-  const pathname = usePathname(); 
+  const pathname = usePathname();
   // const { setUserFunction } = useUser();
 
   const toggleMenu = () => {
@@ -30,7 +30,10 @@ export default function Navbar() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setMenuOpen(false);
       }
     }
@@ -48,19 +51,21 @@ export default function Navbar() {
 
   return (
     <nav className={styles.header}>
-      <div className={styles.userLogoContainer} onClick={toggleMenu}>
+      <div>
         {pathname.startsWith("/movies/") && (
           <button onClick={() => router.back()} className={styles.goBackButton}>
             Go Back
           </button>
         )}
-        <Image
-          src="/user-logo.png"
-          alt="User Logo"
-          width={46}
-          height={46}
-          className={styles.userLogo}
-        />
+        <div className={styles.userLogoContainer} onClick={toggleMenu}>
+          <Image
+            src="/user-logo.png"
+            alt="User Logo"
+            width={46}
+            height={46}
+            className={styles.userLogo}
+          />
+        </div>
       </div>
 
       {menuOpen && (
@@ -89,7 +94,10 @@ export default function Navbar() {
           </button>
 
           {/* Sign Out */}
-          <button onClick={handleSignOut} className={styles.heroButton + " " + styles.signOutItem}>
+          <button
+            onClick={handleSignOut}
+            className={styles.heroButton + " " + styles.signOutItem}
+          >
             Sign Out
           </button>
         </div>
