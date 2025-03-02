@@ -1,5 +1,5 @@
 import { useFilter } from "../lib/FilterContext";
-import styles from "../page.module.css";
+import styles  from "../page.module.css"
 import { robotoCondensed } from "../ui/fonts";
 
 interface GenreButtonsProps {
@@ -19,7 +19,7 @@ export default function GenreButtons({ genres }: GenreButtonsProps) {
 
 
   return (
-    <div className={styles.genreButtonContainer}>
+    <div className={`${styles.genreButtonContainer}  ${styles.paddingTop} ${styles.paddingLeft}`}>
       {genres.map((genre) => (
         <button key={genre.id} 
         className={`${styles.genreButton} ${robotoCondensed.className} ${selectedGenres?.includes(genre.name) ? styles.selected : ''}`}

@@ -5,7 +5,7 @@ import MyListMovies from "./MyListMovies";
 import ComingSoonMovies from "./ComingSoonMovies";
 import GenreButtons from "./GenreButtons";
 import { Genre, Movie } from "../lib/types";
-import styles from "../page.module.css";
+// import styles from "../page.module.css";
 
 interface Props {
   movies: Movie[];
@@ -26,7 +26,7 @@ export default function MovieSections({ movies, genres, userList }: Props) {
     .sort((a, b) => new Date(a.availableDate).getTime() - new Date(b.availableDate).getTime());
 
   return (
-    <div className={styles.contentWrapper}>
+    <div >
       <GenreButtons genres={genres} />
       <GenreMovies genres={moviesByGenre} />
       <ComingSoonMovies movies={comingSoonMovies} />

@@ -488,6 +488,7 @@
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   padding: 10px;
+  padding-left: 10rem; /* ✅ Adds the initial empty space */
 }
 
 .moviesTrack::-webkit-scrollbar {
@@ -506,6 +507,18 @@
 
 .movieCard:active {
   transform: scale(0.95);
+}
+
+.paddingLeft {
+  padding-left: 10rem !important;
+}
+
+.paddingTop {
+  padding-top: 3rem !important;
+}
+
+.paddingBottom {
+  padding-bottom: 3rem !important;
 }
 
 /* Enable hover only on non-touch devices */

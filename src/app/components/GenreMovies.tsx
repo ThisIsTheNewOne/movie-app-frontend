@@ -20,7 +20,7 @@ export default function GenreMovies({ genres }: GenreMoviesProps) {
     <div className={styles.moviesByGenre}>
       {filteredGenres.map((genre) => (
         <section key={genre.id} className={styles.genreSection}>
-          <h2 className={robotoCondensed.className}>{genre.name}</h2>
+          <h2 className={`${robotoCondensed.className} ${styles.paddingLeft}`}>{genre.name}</h2>
           <ScrollableMovies movies={genre.movies} />
         </section>
       ))}
