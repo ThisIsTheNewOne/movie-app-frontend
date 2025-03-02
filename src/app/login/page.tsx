@@ -1,42 +1,44 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
 import styles from "./page.module.css";
 import { roboto } from "@/app/ui/fonts";
 import { useUser } from "../lib/UserContext";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const { setUserFunction } = useUser();
+  const { setUserFunction, setTokenFunction } = useUser();
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
-      username: "",
+      email: "",
       password: "",
     };
 
-    // Username/email validation
-    if (!formData.username) {
-      newErrors.username = "Username is required";
+    if (!formData.email) {
+      newErrors.email = "Email is required";
       isValid = false;
-    } else if (
-      !formData.username.includes("@") &&
-      formData.username.length < 3
-    ) {
-      newErrors.username = "Enter a valid email or username (min 3 characters)";
+    } else if (!formData.email.includes("@")) {
+      newErrors.email = "Enter a valid email";
       isValid = false;
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
       isValid = false;
@@ -48,23 +50,43 @@ export default function Page() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-  // Clear error for the input being changed
-  setErrors(prev => ({
-    ...prev,
-    [name]: ""
-  }));
-    
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSignIn = (e: React.FormEvent) => {
+
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
+    if (!validateForm()) return;
+  
+    setLoading(true);
+    setApiError("");
+  
+    try {
+      const response = await fetch("/api/auth/sign-in", { // Use the Next.js proxy
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Invalid credentials");
+      }
+  
+      const data = await response.json();
+
+      console.log("this is very imporatant", data )
+
+      setTokenFunction(data.token);
       setUserFunction(true);
-      redirect("/");
+      router.push("/");
+    } catch (error) {
+      setApiError("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,39 +97,33 @@ export default function Page() {
           <form className={styles.innerContainer} onSubmit={handleSignIn}>
             <div className={styles.inputWrapper}>
               <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                className={`${roboto.className} ${styles.input} ${
-                  styles.bold
-                } ${errors.username ? styles.error : ""}`}
-                value={formData.username}
+                type="email"
+                name="email"
+                placeholder="Email"
+                className={`${roboto.className} ${styles.input} ${styles.bold} ${
+                  errors.email ? styles.error : ""
+                }`}
+                value={formData.email}
                 onChange={handleInputChange}
               />
-              {errors.username && (
-                <span className={styles.errorText}>{errors.username}</span>
-              )}
+              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
             </div>
             <div className={styles.inputWrapper}>
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                className={`${roboto.className} ${styles.input} ${
-                  styles.bold
-                } ${errors.username ? styles.error : ""}`}
+                className={`${roboto.className} ${styles.input} ${styles.bold} ${
+                  errors.password ? styles.error : ""
+                }`}
                 value={formData.password}
                 onChange={handleInputChange}
               />
-              {errors.password && (
-                <span className={styles.errorText}>{errors.password}</span>
-              )}
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
             </div>
-            <button
-              type="submit"
-              className={`${styles.button} ${styles.normal}`}
-            >
-              Sign In
+            {apiError && <span className={styles.errorText}>{apiError}</span>}
+            <button type="submit" className={`${styles.button} ${styles.normal}`} disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
         </div>
