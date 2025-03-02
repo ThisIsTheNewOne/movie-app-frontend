@@ -14,7 +14,9 @@ export default function Rating({ rating }: RatingProps) {
       <span className={`${robotoCondensed.className} ${styles.ratingLabel}`}>
         <strong>Rating: </strong>
       </span>
-      <StarRating rating={rating} />
+      <div className={styles.starRating}>
+        <StarRating rating={rating} />
+      </div>
     </li>
   );
 }

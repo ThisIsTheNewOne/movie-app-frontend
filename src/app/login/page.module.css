@@ -62,7 +62,7 @@
   
 
   .input {
-    width: 310px;
+    width: 301px;
     height: 44px;
     font-size: 16px;
     line-height: 18.75px;
@@ -71,6 +71,7 @@
     border: 1px solid #751B5C;
     background-color: transparent;
     color: #FFFFFF;
+    padding-left: 15px; 
   }
 
   .input.error {
@@ -83,7 +84,7 @@
   
   .input::placeholder {
     color: #FFFFFF;
-    padding-left: 15px;
+    padding-left: px;
   }
 
   .button {

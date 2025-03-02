@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import useSignOut from "@/app/lib/hooks/useSignOut";
 import styles from "../page.module.css";
 
@@ -31,7 +31,7 @@ export default function UserDropdown({ closeDropdown, darkMode, toggleTheme }: U
   return (
     <div ref={dropdownRef} className={styles.dropdownMenu}>
       <div className={styles.userInfo}>
-        <Image src="/user-logo.png" alt="Profile Picture" width={50} height={50} className={styles.profilePic} />
+        {/* <Image src="/user-logo.png" alt="Profile Picture" width={50} height={50} className={styles.profilePic} /> */}
         <div className={styles.userDetails}>
           <p className={styles.userName}>John Doe</p>
           <p className={styles.userEmail}>johndoe@example.com</p>

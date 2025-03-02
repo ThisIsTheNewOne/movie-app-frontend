@@ -27,6 +27,7 @@ export default function MovieHero({ poster, thumbnail, title }: MovieHeroProps) 
             objectPosition: "center",
           }}
         />
+        <div className={styles.imageOverlay}></div>
         <div className={styles.buttonOverlay}>
           <button className={styles.trailerButton} aria-label="Watch Trailer">
             Trailer
