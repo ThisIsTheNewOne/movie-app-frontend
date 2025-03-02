@@ -473,16 +473,15 @@
 
 .moviesTrack {
   display: flex;
-  gap: 1rem;
   overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
   scroll-behavior: smooth;
-  cursor: grab;
   user-select: none;
-  -webkit-user-select: none;
+  cursor: grab;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 1rem;
+  padding: 10px;
+  padding-left: 10rem;
 }
 
 .moviesTrack::-webkit-scrollbar {
@@ -496,15 +495,73 @@
 .movieCard {
   flex: 0 0 auto;
   width: 261px;
-  transition: transform 0.2s ease;
+  margin-right: 24px;
+  transition: transform 0.2s ease-in-out;
+  position: relative; 
 }
+
 
 .movieCardSpecial {
   flex: 0 0 auto;
+  margin-right: 24px;
   width: 450px;
   height: 260px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease-in-out;
+  position: relative; 
 }
+
+.movieCardSpecial::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transition: background 0.2s ease-in-out;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.moviesTrack:hover .movieCardSpecial:not(:hover)::before {
+  background: #0000004A;
+}
+
+.movieCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transition: background 0.2s ease-in-out;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.moviesTrack:hover .movieCard:not(:hover)::before {
+  background: #0000004A;
+}
+
+.movieImage {
+  pointer-events: none;
+}
+
+.movieCard:active {
+  transform: scale(0.95);
+}
+
+
+
+.movieCardSpecial:active {
+  transform: scale(0.95);
+}
+
+.movieCardSpecial:hover {
+  transform: scale(1.05);
+}
+
 
 .movieCard:hover {
   transform: scale(1.05);
@@ -601,22 +658,14 @@
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   padding: 10px;
-  padding-left: 10rem; /* ✅ Adds the initial empty space */
+  padding-left: 10rem; 
 }
 
 .moviesTrack::-webkit-scrollbar {
   display: none; 
 }
 
-.movieCard {
-  flex: 0 0 auto;
-  margin-right: 10px;
-  transition: transform 0.2s ease-in-out;
-}
 
-.movieImage {
-  pointer-events: none;
-}
 
 .movieCard:active {
   transform: scale(0.95);
