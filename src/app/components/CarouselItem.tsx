@@ -1,17 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 import MovieImage from "./MovieImage";
 import MovieDescription from "./MovieDescription";
 import styles from "../page.module.css";
+import { Movie } from "../lib/types";
 
-type Props = { poster: string; title: string; description: string };
+type Props = { movie: Movie };
 
-export default function CarouselItem({ poster, title, description }: Props) {
+export default function CarouselItem({ movie }: Props) {
   return (
-    <div className={styles.carouselItemWrapper}>
-      <MovieImage src={poster} />
-      <div className={styles.descriptionOverlay}>
-        <MovieDescription title={title} description={description} /> 
-      </div>  
+    <div className={styles.carouselSlide}>
+      <MovieImage src={movie.poster} />
+      <div className={styles.slideOverlay}>
+        <MovieDescription title={movie.title} description={movie.description} />
+      </div>
     </div>
   );
 }
