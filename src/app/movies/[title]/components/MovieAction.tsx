@@ -6,6 +6,7 @@ import { useUser } from "@/app/lib/UserContext";
 import { useEffect, useState } from "react";
 import { addToUserList } from "@/app/lib/api/addToUserList";
 import { removeFromUserList } from "@/app/lib/api/removeFromUserList";
+import { robotoCondensed } from "@/app/ui/fonts";
 
 interface MovieActionsProps {
   movie: Movie;
@@ -51,32 +52,32 @@ export default function MovieActions({ movie, isInList }: MovieActionsProps) {
     <section className={`${styles.actions} ${styles.margin}`}>
       <button
         onClick={handleClick}
-        className={styles.actionWrapper + "" + styles.addToListButton}
+        className={styles.actionWrapper + " " + styles.addToListButton}
         disabled={loading}
       >
         {loading ? (
           "Processing..."
         ) : inList ? (
-          <div>
+          <div className={styles.actionWrapperButton}>
             <Image
-              src="/plus-button.png"  
+              src="/remove-button.png"  
               alt="Add"
-              width={24}
-              height={24}
+              width={41}
+              height={40}
               className={styles.buttonIcon}
             />
-            <span className={styles.actionText}>Remove from List</span>
+            <span  className={`${styles.actionText} ${robotoCondensed.className}`}>Remove from List</span>
           </div>
         ) : (
-          <div>
+          <div className={styles.actionWrapperButton}>
             <Image
               src="/plus-button.png"
               alt="Add"
-              width={24}
-              height={24}
+              width={41}
+              height={40}
               className={styles.buttonIcon}
             />
-            <span className={styles.actionText}>Add to My List</span>
+           <span  className={`${styles.actionText} ${robotoCondensed.className}`}>Add to My List</span>
           </div>
         )}
       </button>
