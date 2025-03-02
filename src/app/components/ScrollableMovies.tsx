@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   movies: Movie[];
+  specialSize?: { width: number; height: number };
 };
 
-export default function ScrollableMovies({ movies }: Props) {
+export default function ScrollableMovies({ movies, specialSize }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -76,15 +77,15 @@ export default function ScrollableMovies({ movies }: Props) {
       {movies.map((movie) => (
         <div
           key={movie.id}
-          className={styles.movieCard}
+          className={ specialSize !== undefined ? styles.movieCardSpecial : styles.movieCard}
           onClick={(e) => handleMovieClick(movie, e)}
           style={{ cursor: "pointer" }}
         >
           <Image
             src={movie.thumbnail || "/fallback-image.jpg"}
             alt={movie.title}
-            width={261}
-            height={386}
+            width={specialSize?.width || 261}
+            height={specialSize?.height || 386}
             className={styles.movieImage}
             priority
             draggable={false}

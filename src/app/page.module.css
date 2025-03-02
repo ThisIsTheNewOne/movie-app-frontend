@@ -499,6 +499,13 @@
   transition: transform 0.2s ease;
 }
 
+.movieCardSpecial {
+  flex: 0 0 auto;
+  width: 450px;
+  height: 260px;
+  transition: transform 0.2s ease;
+}
+
 .movieCard:hover {
   transform: scale(1.05);
 }
