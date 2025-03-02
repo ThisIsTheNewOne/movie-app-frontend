@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "../page.module.css";
+import { useUser } from "../lib/UserContext";
+import { signOut } from "../lib/api/signOut";
 
 export default function Navbar() {
+  const { token, setUserFunction, setTokenFunction } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -19,8 +26,22 @@ export default function Navbar() {
     document.body.classList.toggle("dark-mode");
   };
 
-  const handleSignOut = () => {
-    router.push("/login");
+  const handleSignOut = async () => {
+    if (!token) return;
+    
+    setLoading(true);
+    setError("");
+
+    try {
+      await signOut(token);
+      setUserFunction(undefined); 
+      setTokenFunction(null); 
+      router.push("/login"); 
+    } catch (err) {
+      setError("Failed to sign out");
+    }
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -83,9 +104,11 @@ export default function Navbar() {
               <button
                 onClick={handleSignOut}
                 className={`${styles.dropdownItem} ${styles.signOutItem}`}
+                disabled={loading}
               >
-                Sign Out
+                {loading ? "Signing out..." : "Sign Out"}
               </button>
+              {error && <p className={styles.errorText}>{error}</p>}
             </div>
           )}
         </div>

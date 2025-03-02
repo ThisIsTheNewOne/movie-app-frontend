@@ -9,14 +9,21 @@ import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import MovieSections from "./components/MovieSections";
 import styles from "./page.module.css";
+import { useEffect } from "react";
 
 export default function Home() {
   const { user } = useUser();
   const { movies, genres, userList, loading, error } = useFetchData();
 
-  if (user === undefined || user === false) {
-    redirect("/login");
-  }
+  useEffect(() => {
+    if (user === undefined || user === false) {
+      const timer = setTimeout(() => {
+        redirect("/login");
+      }, 2000); 
+
+      return () => clearTimeout(timer); 
+    }
+  }, [user]);
 
   if (loading) {
     return (

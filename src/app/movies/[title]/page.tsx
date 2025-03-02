@@ -8,20 +8,33 @@ import MovieActions from "./components/MovieAction";
 import MovieDetails from "./components/MovieDetails";
 import MovieDescription from "./components/MovieDescription";
 import Navbar from "@/app/components/Navbar";
-import { use } from "react";
+import { use, useEffect } from "react";
 import useMovieDetails from "@/app/lib/hooks/useMovieDetails";
 import useUserMovieStatus from "@/app/lib/hooks/useUserMovieStatus";
+import { useUser } from "@/app/lib/UserContext";
+import { redirect } from "next/navigation";
 
 interface MoviePageProps {
   params: Promise<{ title: string }>;
 }
 
 export default function MoviePage({ params }: MoviePageProps) {
+    const { user } = useUser();
   const { title } = use(params);
   const decodedTitle = decodeURIComponent(title);
 
   const { movie, loading, error } = useMovieDetails(decodedTitle);
   const { isInList } = useUserMovieStatus(movie);
+
+    useEffect(() => {
+      if (user === undefined || user === false) {
+        const timer = setTimeout(() => {
+          redirect("/login");
+        }, 2000); 
+  
+        return () => clearTimeout(timer); 
+      }
+    }, [user]);
 
   if (loading) return <p>Loading movie details...</p>;
   if (error) return <p>{error}</p>;
