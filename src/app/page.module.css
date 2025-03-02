@@ -195,6 +195,11 @@
   color: white;
 }
 
+.selected {
+  background-color:  #751B5C;
+  color: white;
+}
+
 .moviesGrid {
   display: flex;
   flex-direction: row;

@@ -1,3 +1,4 @@
+import { useFilter } from "../lib/FilterContext";
 import styles from "../page.module.css";
 import { robotoCondensed } from "../ui/fonts";
 
@@ -6,11 +7,23 @@ interface GenreButtonsProps {
 }
 
 export default function GenreButtons({ genres }: GenreButtonsProps) {
+  const { selectedGenres, setSelectedGenres } = useFilter();
+
+  const handleGenreClick = (genre: string) => {
+    if (selectedGenres?.includes(genre)) {
+      setSelectedGenres(selectedGenres.filter((g) => g !== genre));
+    } else {
+      setSelectedGenres([...(selectedGenres || []), genre]);
+    }
+  };
+
+
   return (
     <div className={styles.genreButtonContainer}>
       {genres.map((genre) => (
         <button key={genre.id} 
-         className={`${styles.genreButton} ${robotoCondensed.className}`}
+        className={`${styles.genreButton} ${robotoCondensed.className} ${selectedGenres?.includes(genre.name) ? styles.selected : ''}`}
+         onClick={() => handleGenreClick(genre.name)}
         >
           {genre.name}
         </button>

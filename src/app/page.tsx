@@ -21,6 +21,7 @@ import GenreMovies from "./components/GenreMovies";
 export default function Home() {
   const { user } = useUser();
 
+
   if (user === undefined) {
     redirect("/login");
   }
