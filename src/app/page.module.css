@@ -627,6 +627,40 @@
   padding-bottom: 3rem !important;
 }
 
+.loadingContainerMain {
+  height: 100vh;
+}
+
+
+/* Loader Styles */
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #222;
+  color: white;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #751b5c;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {

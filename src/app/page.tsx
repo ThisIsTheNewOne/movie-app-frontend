@@ -10,6 +10,7 @@ import Carousel from "./components/Carousel";
 import MovieSections from "./components/MovieSections";
 import styles from "./page.module.css";
 import { useEffect } from "react";
+import Loader from "./components/Loader";
 
 export default function Home() {
   const { user } = useUser();
@@ -25,11 +26,14 @@ export default function Home() {
     }
   }, [user]);
 
+
   if (loading) {
     return (
-      <div className={styles.loadingContainer}>
-        <h2>Loading movies...</h2>
-      </div>
+      <main className={styles.mainLoading}>
+        <div className={styles.loadingContainerMain}>
+          <Loader />
+        </div>
+      </main>
     );
   }
 
