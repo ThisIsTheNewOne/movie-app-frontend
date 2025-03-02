@@ -48,6 +48,19 @@
     padding: 10px;
   }
 
+  .inputWrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .errorText {
+    color: #ff4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+  }
+  
+
   .input {
     width: 310px;
     height: 44px;
@@ -60,6 +73,14 @@
     color: #FFFFFF;
   }
 
+  .input.error {
+    border-color: #ff4444;
+  }
+  
+  .input:hover {
+    border-color: #751B5C;
+  }
+  
   .input::placeholder {
     color: #FFFFFF;
     padding-left: 15px;
