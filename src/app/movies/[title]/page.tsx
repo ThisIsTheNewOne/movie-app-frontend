@@ -110,7 +110,7 @@ export default function MoviePage({ params }: MoviePageProps) {
            thumbnail={movie?.thumbnail || "/fallback-image.jpg"}
            title={movie?.title || "Unknown Movie"}
         />
-        <MovieActions />
+        <MovieActions movie={movie} />
         <MovieDetails
           rating={Number(movie?.rating) || 0}
           cast={movie?.cast || "Unknown"}
