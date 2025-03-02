@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { useUser } from "./lib/UserContext";
 import useFetchData from "./lib/hooks/useFetchData";
 
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import MovieSections from "./components/MovieSections";
@@ -35,11 +35,11 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.page}>
-      <Navbar />
+    <div className={styles.page}>   
+      {/* <Navbar /> */}
       <main className={styles.main}>
         <Carousel movies={movies.filter((item) => item.highlighted)} />
-        <MovieSections movies={movies} genres={genres} userList={userList} />
+        <MovieSections movies={movies} genres={genres} userList={userList} />  
       </main>
       <Footer />
     </div>

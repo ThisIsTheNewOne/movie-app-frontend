@@ -306,9 +306,17 @@
 
 .genreButtonContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; 
   margin-top: 20px;
   gap: 10px;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+  padding-left: 10rem;
+  padding-top: 3rem;
+}
+
+.genreButtonContainer::-webkit-scrollbar {
+  display: none; 
 }
 
 .genreButton {
@@ -545,18 +553,54 @@
     align-items: center;
   }
 
+  .paddingLeft {
+    padding-left: 1rem !important;
+  }
+
+  .moviesTrack {
+    padding: 0rem;
+    padding-left: 1rem
+  }
+
   .column {
     width: 100%;
     align-items: center;
   }
 
   .carouselContainer {
-    height: 60vh; /* Tablet */
+    height: 80vh; 
   }
+
+  .description p {
+    width: 95%;
+    font-size: clamp(16px, 3vw + 1rem, 18px);
+  }
+
+  .description button {
+    width: 50%;
+    font-size: clamp(16px, 3vw + 1rem, 24px);
+    height: 40px;
+    border-radius: 16px;
+    border: none;
+    background: #751b5c;
+    color: #fff;
+  }
+
+  .genreButtonContainer {
+    padding-left: 1rem !important;
+  }
+
+  
 }
 
 
 @media (max-width: 480px) {
+
+  .main {
+    position: static;
+    width: auto;
+  }
+
   .footerContent {
     margin-left: 1rem;
     font-size: 12px;
@@ -567,6 +611,40 @@
   .column {
     width: 100%;
     align-items: center;
+  }
+
+  .genreButtonContainer {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    user-select: none;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px;
+  }
+  
+  .genreButtonContainer::-webkit-scrollbar {
+    display: none; 
+  }
+  
+  .genreButton {
+    flex: 0 0 auto;
+    cursor: pointer;
+  }
+  
+  .genreButton:active {
+    transform: scale(0.95);
+  }
+  
+  .selected {
+    background-color: #751b5c; 
+    color: white;
+  }
+
+  .genreButtonContainer::-webkit-scrollbar {
+    display: none; 
   }
 }
 

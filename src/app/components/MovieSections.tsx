@@ -27,7 +27,7 @@ export default function MovieSections({ movies, genres, userList }: Props) {
 
   return (
     <div >
-      <GenreButtons genres={genres} />
+      <GenreButtons genres={genres} />  
       <GenreMovies genres={moviesByGenre} />
       <ComingSoonMovies movies={comingSoonMovies} />
       <MyListMovies movies={userListMovies} />

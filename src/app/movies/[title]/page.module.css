@@ -215,7 +215,7 @@
 @media (max-width: 768px) {
   .buttonContainer {
     flex-direction: column;
-    gap: 5px;
+    gap: 5px;   
   }
 
   .imageContainer img {

@@ -16,10 +16,10 @@ export default function GenreMovies({ genres }: GenreMoviesProps) {
     ? genres.filter((genre) => selectedGenres.includes(genre.name))
     : genres;
 
-  return (
+  return (  
     <div className={styles.moviesByGenre}>
       {filteredGenres.map((genre) => (
-        <section key={genre.id} className={styles.genreSection}>
+        <section key={genre.id} className={styles.genreSection}>  
           <h2 className={`${robotoCondensed.className} ${styles.paddingLeft}`}>{genre.name}</h2>
           <ScrollableMovies movies={genre.movies} />
         </section>
@@ -27,3 +27,4 @@ export default function GenreMovies({ genres }: GenreMoviesProps) {
     </div>
   );
 }
+  

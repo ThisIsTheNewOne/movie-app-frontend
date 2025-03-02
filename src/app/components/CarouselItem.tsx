@@ -10,8 +10,8 @@ export default function CarouselItem({ poster, title, description }: Props) {
     <div className={styles.carouselItemWrapper}>
       <MovieImage src={poster} />
       <div className={styles.descriptionOverlay}>
-        <MovieDescription title={title} description={description} />
-      </div>
+        <MovieDescription title={title} description={description} /> 
+      </div>  
     </div>
   );
 }

@@ -23,8 +23,8 @@ export default function Carousel({ movies }: Props) {
   return (
     <section className={styles.carouselContainer}>
       <div className={styles.carousel} ref={carouselRef}>
-        {movies.map((movie, index) => (
-          <div key={index} className={styles.carouselItem}>
+        {movies.map((movie, index) => (  
+          <div key={index} className={styles.carouselItem}>  
             <CarouselItem
               key={movie.id}
               poster={movie.poster}
