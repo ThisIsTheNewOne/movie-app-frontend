@@ -1,6 +1,6 @@
 "use client";
 import { useState, 
-  // useEffect, 
+  useEffect, 
   useRef } from "react";
 import styles from "../page.module.css";
 import CarouselItem from "./CarouselItem";
@@ -11,19 +11,19 @@ type Props = { movies: Movie[] };
 export default function Carousel({ movies }: Props) {
   const [current, setCurrent] = useState(0);
   const slideTimeout = useRef<NodeJS.Timeout | null>(null);
-  // const length = movies.length;
+  const length = movies.length;
 
 
-  // useEffect(() => {
-  //   resetTimeout();
-  //   slideTimeout.current = setTimeout(() => {
-  //     setCurrent((prevIndex) => (prevIndex === length - 1 ? 0 : prevIndex + 1));
-  //   }, 5000);
+  useEffect(() => {
+    resetTimeout();
+    slideTimeout.current = setTimeout(() => {
+      setCurrent((prevIndex) => (prevIndex === length - 1 ? 0 : prevIndex + 1));
+    }, 5000);
 
-  //   return () => {
-  //     resetTimeout();
-  //   };
-  // }, [current, length]);
+    return () => {
+      resetTimeout();
+    };
+  }, [current, length]);
 
   const resetTimeout = () => {
     if (slideTimeout.current) {
