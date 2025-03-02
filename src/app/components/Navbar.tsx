@@ -82,7 +82,7 @@ export default function Navbar() {
           </button>
 
           {/* Sign Out */}
-          <button onClick={handleSignOut} className={styles.signOutButton}>
+          <button onClick={handleSignOut} className={styles.heroButton + " " + styles.signOutItem}>
             Sign Out
           </button>
         </div>

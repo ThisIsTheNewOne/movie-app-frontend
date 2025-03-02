@@ -7,6 +7,7 @@ import MovieHero from "./components/MovieHero";
 import MovieActions from "./components/MovieAction";
 import MovieDetails from "./components/MovieDetails";
 import MovieDescription from "./components/MovieDescription";
+import Navbar from "@/app/components/Navbar";
 
 interface MoviePageProps {
   params: { title: string };
@@ -17,6 +18,7 @@ export default function MoviePage({ params }: MoviePageProps) {
   
     return (
       <div className={styles.container}>
+        <Navbar />
         <main className={styles.main}>
           <MovieHero
             poster={entireMovie.poster}

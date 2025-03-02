@@ -39,6 +39,10 @@
   padding: 1rem;
 }
 
+.signOutItem {
+  width: 60px;
+}
+
 /* .header {
   display: flex;
   align-items: center;
@@ -195,6 +199,14 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
+}
+
+.heroButton {
+  width: 343px;
+  height: 57px;
+  border-radius: 16px;
+  background: #751B5C;
+  color: white;
 }
 
 /* .carouselButtons {

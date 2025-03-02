@@ -17,6 +17,7 @@ export default function MovieDescription({ title, description }: Props) {
         <h1>{title}</h1>
         <section>
           <p className={roboto.className}>{truncateDescription(description)}</p>
+          <button className={styles.heroButton}>Discover</button>
         </section>
       </div>
     </div>
