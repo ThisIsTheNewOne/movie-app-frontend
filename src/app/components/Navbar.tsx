@@ -2,13 +2,17 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "../page.module.css";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 // import { useUser } from "../lib/UserContext";
-import { redirect } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); 
+  
+  const router = useRouter();
+  const pathname = usePathname(); 
   // const { setUserFunction } = useUser();
 
   const toggleMenu = () => {
@@ -21,9 +25,7 @@ export default function Navbar() {
   };
 
   const handleSignOut = () => {
-    console.log("Sign out");
-      // setUserFunction(undefined);
-      redirect("/login");
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -47,6 +49,11 @@ export default function Navbar() {
   return (
     <nav className={styles.header}>
       <div className={styles.userLogoContainer} onClick={toggleMenu}>
+        {pathname.startsWith("/movies/") && (
+          <button onClick={() => router.back()} className={styles.goBackButton}>
+            Go Back
+          </button>
+        )}
         <Image
           src="/user-logo.png"
           alt="User Logo"

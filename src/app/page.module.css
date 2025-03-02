@@ -30,26 +30,22 @@
 } 
 
 .header {
-  position: fixed;
-  top: 0;
-  right: 0;
+  width: 100%;
   z-index: 1000;
-  /* background: rgba(0, 0, 0, 0.5);  */
   backdrop-filter: blur(8px); 
-  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  background-color: transparent;
+  color: transparent;
 }
 
 .signOutItem {
   width: 60px;
 }
 
-/* .header {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  background-color: #333;
-  position: relative;
-} */
 
 .userLogoContainer {
   position: relative;
@@ -60,13 +56,7 @@
   width: 46px;
   height: 46px;
 }
-.header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
-  background-color: #111;
-  color: white;
-}
+
 
 .userLogoContainer {
   position: relative;

@@ -23,12 +23,10 @@ export default function MoviePage({ params }: MoviePageProps) {
   const { title } = use(params); 
   const decodedTitle = decodeURIComponent(title);
 
-  const { movies } = useMovies();
+  const { movies, setMovies  } = useMovies();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  console.log("this ist he id", title);
 
   useEffect(() => {
     if (!token) return;
@@ -37,18 +35,41 @@ export default function MoviePage({ params }: MoviePageProps) {
       setLoading(true);
       setError("");
 
-    
-      const foundMovie = movies.find(
-        (m: Movie) => m.title.toLowerCase() === decodedTitle.toLowerCase()
-      );
+      let movieList = movies;
 
-        if (!foundMovie) {
-          setError("Movie not found");
+      if (movies.length === 0) {
+        try {
+          const response = await fetch("/api/films/movies", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch movies list");
+          }
+
+          movieList = await response.json();
+          setMovies(movieList);
+        } catch (err) {
+          setError("Error fetching movie list.");
           setLoading(false);
           return;
         }
+      }
 
-        fetchMovieDetails(foundMovie.id);
+      const foundMovie = movieList.find(
+        (m: Movie) => m.title.toLowerCase() === decodedTitle.toLowerCase()
+      );
+
+      if (!foundMovie) {
+        setError("Movie not found");
+        setLoading(false);
+        return;
+      }
+
+      fetchMovieDetails(foundMovie.id);
     };
 
     fetchMoviesList();
