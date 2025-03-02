@@ -1,4 +1,5 @@
 import { FilterProvider } from "./lib/FilterContext";
+import { MoviesProvider } from "./lib/MoviesContext";
 import { UserProvider } from "./lib/UserContext";
 import "./ui/global.css";
 import { roboto } from "@/app/ui/fonts";
@@ -13,7 +14,9 @@ export default function RootLayout({
       <body className={`${roboto.className}`}>
         <UserProvider>
           <FilterProvider>
-          {children}
+            <MoviesProvider>
+              {children}
+            </MoviesProvider>
           </FilterProvider>
         </UserProvider>
       </body>

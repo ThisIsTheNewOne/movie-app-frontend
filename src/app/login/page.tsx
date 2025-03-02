@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { roboto } from "@/app/ui/fonts";
 import { useUser } from "../lib/UserContext";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const { setUserFunction, setTokenFunction } = useUser();
+  const { setUserFunction, setTokenFunction, token  } = useUser();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -23,6 +23,14 @@ export default function Page() {
 
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
+
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    }
+  }, [token, router]);
+  
 
   const validateForm = () => {
     let isValid = true;
@@ -77,8 +85,6 @@ export default function Page() {
       }
   
       const data = await response.json();
-
-      console.log("this is very imporatant", data )
 
       setTokenFunction(data.token);
       setUserFunction(true);

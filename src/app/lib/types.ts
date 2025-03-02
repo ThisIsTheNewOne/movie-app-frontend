@@ -10,3 +10,4 @@ export interface Movie {
     availableDate: string;
     title: string;
   }
+

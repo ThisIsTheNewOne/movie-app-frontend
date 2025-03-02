@@ -43,15 +43,9 @@ export default function ScrollableMovies({ movies }: Props) {
     const handleMovieClick = (movie: Movie, e: React.MouseEvent) => {
         if (!isDragging) {
           e.preventDefault();
-        //   redirect(`/movies/${encodeURIComponent(movieTitle.toLowerCase())}`);
           const encodedTitle = encodeURIComponent(movie.title.toLowerCase());
-        //   const query = new URLSearchParams({
-        //     id: movie.id.toString(),
-        //     thumbnail: movie.thumbnail || "",
-        //     description: movie.description || "",
-        //   }).toString();
-
           router.push(`/movies/${encodedTitle}`);
+
         }
       };
 
