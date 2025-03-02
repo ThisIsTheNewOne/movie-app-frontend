@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { redirect } from "next/navigation";
 import { useUser } from "./lib/UserContext";
-import { Movie } from "./lib/types";
+import { Genre, Movie } from "./lib/types";
 
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -15,8 +15,8 @@ import MyListMovies from "./components/MyListMovies";
 import GenreMovies from "./components/GenreMovies";
 import Carousel from "./components/Carousel";
 
-import genresList from "./lib/data/genresList.json";
-import userList from "./lib/data/userList.json";
+// import genresList from "./lib/data/genresList.json";
+// import userList from "./lib/data/userList.json";
 import { useMovies } from "./lib/MoviesContext";
 
 export default function Home() {
@@ -24,6 +24,8 @@ export default function Home() {
   const { movies, setMovies } = useMovies();
 
   const [loading, setLoading] = useState(true);
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const [userList, setUserList] = useState<string[]>([]);
   const [error, setError] = useState("");
 
   if (user === undefined || user === false) {
@@ -33,35 +35,67 @@ export default function Home() {
   useEffect(() => {
     if (!token) return;
 
-    const fetchMovies = async () => {
+    const fetchMoviesAndGenres = async () => {
       setLoading(true);
       setError("");
 
       try {
-        const response = await fetch("/api/films/movies", {
+        if (movies.length === 0) {
+          const movieResponse = await fetch("/api/films/movies", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!movieResponse.ok) {
+            throw new Error("Failed to fetch movies");
+          }
+
+          const movieData = await movieResponse.json();
+          setMovies(movieData);
+        }
+
+
+        if (genres.length === 0) {
+          const genreResponse = await fetch("/api/films/genres", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!genreResponse.ok) {
+            throw new Error("Failed to fetch genres");
+          }
+
+          const genreData = await genreResponse.json();
+          setGenres(genreData);
+        }
+
+        const userListResponse = await fetch("/api/films/user", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch movies");
+        if (!userListResponse.ok) {
+          throw new Error("Failed to fetch user list");
         }
 
-        const data = await response.json();
-        setMovies(data);
+        const userListData = await userListResponse.json();
+        setUserList(userListData);
       } catch (err) {
-        setError("Error loading movies.");
+        setError("Error loading movies or genres.");
       } finally {
         setLoading(false);
       }
     };
 
-    if(movies.length === 0){
-      fetchMovies();
-    }
+    fetchMoviesAndGenres();
   }, [token]);
+
 
   if (loading) {
     return (
@@ -81,7 +115,7 @@ export default function Home() {
 
   // Filter movies based on category
   const highlightedMovies = movies.filter((item) => item.highlighted);
-  const moviesByGenre = genresList.map((genre) => ({
+  const moviesByGenre = genres.map((genre) => ({
     ...genre,
     movies: movies.filter((movie) => movie.genre === genre.id),
   }));
@@ -100,7 +134,7 @@ export default function Home() {
       <main className={styles.main}>
         <Carousel movies={highlightedMovies} />
         <div className={styles.contentWrapper}>
-          <GenreButtons genres={genresList} />
+          <GenreButtons genres={genres} />
           <GenreMovies genres={moviesByGenre} />
           <ComingSoonMovies movies={comingSoonMovies} />
           <MyListMovies movies={userListMovies} />

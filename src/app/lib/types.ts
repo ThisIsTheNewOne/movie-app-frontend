@@ -11,3 +11,7 @@ export interface Movie {
     title: string;
   }
 
+  export interface Genre {
+    id: string;
+    name: string;
+  }
