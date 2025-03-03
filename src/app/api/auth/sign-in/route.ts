@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
@@ -19,7 +19,20 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
-    return NextResponse.json(data, { status: 200 });
+    const res = NextResponse.json(
+      { message: "Login successful", token: data.token },
+      { status: 200 }
+    );
+
+    res.cookies.set("authToken", data.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 60 * 60 * 24,
+    });
+
+    return res;
   } catch (error) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }

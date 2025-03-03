@@ -2,6 +2,8 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie"; 
 
 type UserContextType = {
   user: boolean | undefined;
@@ -19,14 +21,24 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<boolean | undefined>(undefined);
   const [userName, setUserNameState] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    // Load token from localStorage on initial load
-    const storedToken = localStorage.getItem("authToken");
-    if (storedToken) {
-      setToken(storedToken);
-      setUser(true); // Assume authenticated if token exists
-    }
+    const fetchUser = async () => {
+      try {
+        const response = await fetch("/api/auth/me", { method: "GET" });
+        if (!response.ok) throw new Error("Not authenticated");
+
+        const data = await response.json();
+        setToken(data.token);
+        setUser(true);
+      } catch {
+        setUser(false);
+        setToken(null);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   const setUserFunction = (props: boolean | undefined) => {
@@ -42,22 +54,30 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUserNameState(name)
   };
 
-  const setTokenFunction = (token: string | null) => {
+  const setTokenFunction = async (token: string | null) => {
+    console.log("this is the token I have", token)
     if (token) {
-      localStorage.setItem("authToken", token);
+      await fetch("/api/auth/set-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+
       setUser(true);
     } else {
-      localStorage.removeItem("authToken");
+      await fetch("/api/auth/logout", { method: "GET" });
       setUser(false);
     }
     setToken(token);
   };
 
-  const logout = () => {
-    localStorage.removeItem("authToken");
+  const logout = async () => {
+    await fetch("/api/auth/logout", { method: "GET" });
     setToken(null);
     setUser(false);
+    router.push("/login");
   };
+
 
   return (
     <UserContext.Provider value={{ user, userName,  token, setUserFunction, setUserName, setTokenFunction, logout }}>

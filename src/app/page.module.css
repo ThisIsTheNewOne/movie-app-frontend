@@ -290,6 +290,7 @@
   border: none;
   cursor: pointer;
   padding: 10px;
+  font-size: clamp(16px, 5vw, 24px);
 }
 
 

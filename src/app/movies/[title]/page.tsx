@@ -31,7 +31,7 @@ export default function MoviePage({ params }: MoviePageProps) {
     if (user === undefined || user === false) {
       const timer = setTimeout(() => {
         redirect("/login");
-      }, 2000);
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
