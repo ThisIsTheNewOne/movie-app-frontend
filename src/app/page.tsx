@@ -20,7 +20,7 @@ export default function Home() {
     if (user === undefined || user === false) {
       const timer = setTimeout(() => {
         redirect("/login");
-      }, 2000); 
+      }, 4000); 
 
       return () => clearTimeout(timer); 
     }
